@@ -1,7 +1,19 @@
 def total_integers(array)
   # Count the total number of integers inside of the given array
   # The array may be nested, and the integers inside these "inner" layers must also be counted
-  #
+  return 0 if array.empty?
+
+  first = array[0]
+  rest = array[1..-1]
+
+  if first.is_a?(Array)
+    total_integers(first) + total_integers(rest)
+  elsif first.is_a?(Integer)
+    1 + total_integers(rest)
+  else
+    total_integers(rest)
+  end
+
   # Example: `total_integers([0, 1, [5]]) == 3`
   #
   # NOTE: you may notice that `Array#flatten` would make quick work of this,
